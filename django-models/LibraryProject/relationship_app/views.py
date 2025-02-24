@@ -86,6 +86,7 @@ def list_books(request):
 # Class-Based View: Display library details
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = "library_detail.html"
+    template_name = "relationship_app/library_detail.html"  # Updated path
     context_object_name = "library"
+
 
