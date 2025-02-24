@@ -7,10 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
 
-
-
 from .models import Library
-
 
 # User Registration View
 def register(request):
@@ -27,7 +24,7 @@ def register(request):
 # User Login View
 def user_login(request):
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -40,9 +37,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, "relationship_app/logout.html")
-
-
-
 # View to Add a Book (Restricted)
 @permission_required("relationship_app.can_add_book", raise_exception=True)
 def add_book(request):
