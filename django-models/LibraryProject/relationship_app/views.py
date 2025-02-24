@@ -84,47 +84,32 @@ class LibraryDetailView(DetailView):
 # Task 3: Role-Based Access Control Views
 # -----------------------------
 
+# Helper function to check if the user is an Admin
 def is_admin(user):
-    return user.is_authenticated and \
-           hasattr(user, 'userprofile') and \
-           user.userprofile.role == "Admin"
+    return hasattr(user, 'userprofile') and user.userprofile.role == "Admin"
 
+@user_passes_test(is_admin)
+def admin_view(request):
+    # Render a template that displays Admin-specific content.
+    return render(request, "relationship_app/admin_view.html")
+
+# Helper function to check if the user is a Librarian
 def is_librarian(user):
-    return user.is_authenticated and \
-           hasattr(user, 'userprofile') and \
-           user.userprofile.role == "Librarian"
+    return hasattr(user, 'userprofile') and user.userprofile.role == "Librarian"
 
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    # Render a template that displays Librarian-specific content.
+    return render(request, "relationship_app/librarian_view.html")
+
+# Helper function to check if the user is a Member
 def is_member(user):
-    return user.is_authenticated and \
-           hasattr(user, 'userprofile') and \
-           user.userprofile.role == "Member"
+    return hasattr(user, 'userprofile') and user.userprofile.role == "Member"
 
-# # Helper function to check if the user is an Admin
-# def is_admin(user):
-#     return hasattr(user, 'userprofile') and user.userprofile.role == "Admin"
-
-# @user_passes_test(is_admin)
-# def admin_view(request):
-#     # Render a template that displays Admin-specific content.
-#     return render(request, "relationship_app/admin_view.html")
-
-# # Helper function to check if the user is a Librarian
-# def is_librarian(user):
-#     return hasattr(user, 'userprofile') and user.userprofile.role == "Librarian"
-
-# @user_passes_test(is_librarian)
-# def librarian_view(request):
-#     # Render a template that displays Librarian-specific content.
-#     return render(request, "relationship_app/librarian_view.html")
-
-# # Helper function to check if the user is a Member
-# def is_member(user):
-#     return hasattr(user, 'userprofile') and user.userprofile.role == "Member"
-
-# @user_passes_test(is_member)
-# def member_view(request):
-#     # Render a template that displays Member-specific content.
-#     return render(request, "relationship_app/member_view.html")
+@user_passes_test(is_member)
+def member_view(request):
+    # Render a template that displays Member-specific content.
+    return render(request, "relationship_app/member_view.html")
 
 
 
