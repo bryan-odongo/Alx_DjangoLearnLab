@@ -36,13 +36,13 @@ class CustomLogoutView(LogoutView):
     template_name = 'relationship_app/logout.html'
 	
 def is_admin(user):
-    return user.userprofile.role == 'Admin'
+    return user.userprofile.role == 'Admin' if hasattr(user, 'userprofile') else False
 
 def is_librarian(user):
-    return user.userprofile.role == 'Librarian'
+    return user.userprofile.role == 'Librarian' if hasattr(user, 'userprofile') else False
 
 def is_member(user):
-    return user.userprofile.role == 'Member'
+    return user.userprofile.role == 'Member' if hasattr(user, 'userprofile') else False
 
 @login_required
 @user_passes_test(is_admin)
