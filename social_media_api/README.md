@@ -70,7 +70,7 @@ This **Social Media API** is designed to provide backend functionality for a soc
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-repo/social-media-api.git
+   git clone https://github.com/bryan-odongo/Alx_DjangoLearnLab/tree/master/social_media_api
    cd social-media-api
    ```
 
